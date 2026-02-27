@@ -1,36 +1,43 @@
 import Container from "../ui/Container";
 import Section from "../ui/Section";
 import Heading from "../ui/Heading";
-import Text from "../ui/Text";
+import SectionImage from "../ui/SectionImage";
+
+interface AuthorityGroup {
+  title: string;
+  items: string[];
+}
 
 interface AuthorityProps {
   headline: string;
-  bio: string;
-  achievements: string[];
-  imagePlaceholder?: boolean;
+  groups: AuthorityGroup[];
+  image?: string;
 }
 
-const Authority = ({ headline, bio, achievements, imagePlaceholder }: AuthorityProps) => (
+const Authority = ({ headline, groups, image }: AuthorityProps) => (
   <Section id="authority" variant="muted">
     <Container>
-      <div className="max-w-4xl mx-auto grid md:grid-cols-[1fr_auto] gap-12 items-center">
-        <div>
-          <Heading as="h2" className="mb-4">{headline}</Heading>
-          <Text variant="muted" className="mb-6">{bio}</Text>
-          <ul className="space-y-3">
-            {achievements.map((a, i) => (
-              <li key={i} className="flex items-center gap-2 text-sm text-foreground">
-                <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" />
-                {a}
-              </li>
-            ))}
-          </ul>
+      <div className="max-w-4xl mx-auto">
+        <SectionImage src={image} alt={headline} className="mb-4" offsetPercent={33.33} />
+        <Heading as="h2" className="text-center mb-8">{headline}</Heading>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {groups.map((group, gi) => (
+            <div key={gi}>
+              <h3 className="text-base font-semibold text-foreground mb-2">
+                {gi + 1}. {group.title}
+              </h3>
+              <ul className="space-y-2 pl-4">
+                {group.items.map((item, ii) => (
+                  <li key={ii} className="flex items-start gap-2 text-sm text-muted-foreground">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-1.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-        {imagePlaceholder && (
-          <div className="w-48 h-48 rounded-lg bg-muted border border-border flex items-center justify-center text-muted-foreground text-sm mx-auto">
-            Photo
-          </div>
-        )}
       </div>
     </Container>
   </Section>

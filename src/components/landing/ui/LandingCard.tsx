@@ -13,7 +13,7 @@ const cardVariants = {
 };
 
 const LandingCard = ({ children, className = "", variant = "default" }: LandingCardProps) => (
-  <div className={`rounded-lg p-6 md:p-8 ${cardVariants[variant]} ${className}`}>
+  <div className={`rounded-lg p-6 md:p-8 card-hover-glow ${cardVariants[variant]} ${className}`}>
     {children}
   </div>
 );

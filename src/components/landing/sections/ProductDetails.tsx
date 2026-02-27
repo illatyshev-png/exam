@@ -3,8 +3,10 @@ import Section from "../ui/Section";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import LandingCard from "../ui/LandingCard";
+import SectionImage from "../ui/SectionImage";
 
 interface Feature {
+  icon?: string;
   name: string;
   detail: string;
 }
@@ -21,24 +23,31 @@ interface ProductDetailsProps {
 const ProductDetails = ({ headline, features, bonus }: ProductDetailsProps) => (
   <Section id="details">
     <Container className="max-w-4xl mx-auto">
+      <SectionImage src="/sections/details.png" className="mb-4" offsetPercent={50} />
       <Heading as="h2" className="text-center mb-10">{headline}</Heading>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+      <div className="grid sm:grid-cols-2 gap-5 mb-12">
         {features.map((f, i) => (
           <div
             key={i}
-            className="bg-card border border-border rounded-lg p-5 shadow-[var(--shadow-soft)]"
+            className="bg-card border border-border rounded-lg p-6 shadow-[var(--shadow-soft)] card-hover-glow"
           >
-            <p className="font-medium text-foreground mb-1">{f.name}</p>
-            <p className="text-sm text-muted-foreground">{f.detail}</p>
+            <p className="font-semibold text-foreground mb-2 text-base">{f.icon && <>{f.icon}{" "}</>}{f.name}</p>
+            <p className="text-sm text-muted-foreground leading-relaxed">{f.detail}</p>
           </div>
         ))}
       </div>
 
-      <LandingCard variant="elevated" className="text-center bg-accent/5 border-accent/20">
-        <Heading as="h3" className="mb-2">{bonus.title}</Heading>
-        <Text variant="muted">{bonus.description}</Text>
-      </LandingCard>
+      <div className="relative max-w-2xl mx-auto">
+        <div className="absolute -inset-1 bg-gradient-to-r from-accent/40 via-accent/60 to-accent/40 rounded-xl blur-sm animate-pulse" />
+        <LandingCard variant="elevated" className="relative text-center bg-accent/10 border-accent/30 border-2 py-8">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-accent bg-accent/10 px-3 py-1 rounded-full mb-3">
+            Актуально
+          </span>
+          <Heading as="h3" className="mb-3 text-accent">{bonus.title}</Heading>
+          <Text className="text-foreground/80 font-medium">{bonus.description}</Text>
+        </LandingCard>
+      </div>
     </Container>
   </Section>
 );

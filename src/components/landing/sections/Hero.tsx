@@ -8,11 +8,10 @@ interface HeroProps {
   subheadline: string;
   ctaText: string;
   ctaHref: string;
-  trustNote?: string;
 }
 
-const Hero = ({ headline, subheadline, ctaText, ctaHref, trustNote }: HeroProps) => (
-  <section className="py-20 md:py-32 bg-background">
+const Hero = ({ headline, subheadline, ctaText, ctaHref }: HeroProps) => (
+  <section className="py-20 pb-16 md:py-32 md:pb-20 bg-background">
     <Container className="text-center max-w-3xl mx-auto">
       <Heading as="h1" className="mb-6 animate-fade-in-up">
         {headline}
@@ -25,11 +24,6 @@ const Hero = ({ headline, subheadline, ctaText, ctaHref, trustNote }: HeroProps)
           {ctaText}
         </LandingButton>
       </div>
-      {trustNote && (
-        <Text variant="small" className="mt-6 animate-fade-in-up [animation-delay:300ms] opacity-0">
-          {trustNote}
-        </Text>
-      )}
     </Container>
   </section>
 );

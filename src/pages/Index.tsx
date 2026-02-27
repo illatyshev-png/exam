@@ -1,6 +1,7 @@
 import Header from "../components/landing/layout/Header";
 import Footer from "../components/landing/layout/Footer";
 import Hero from "../components/landing/sections/Hero";
+import StatsBar from "../components/landing/sections/StatsBar";
 import Pain from "../components/landing/sections/Pain";
 import Solution from "../components/landing/sections/Solution";
 import Authority from "../components/landing/sections/Authority";
@@ -8,11 +9,13 @@ import ProductDetails from "../components/landing/sections/ProductDetails";
 import SocialProof from "../components/landing/sections/SocialProof";
 import Pricing from "../components/landing/sections/Pricing";
 import FAQ from "../components/landing/sections/FAQ";
+import RevealOnScroll from "../components/landing/ui/RevealOnScroll";
 
 import {
   siteConfig,
   navLinks,
   heroContent,
+  statsContent,
   painContent,
   solutionContent,
   authorityContent,
@@ -53,13 +56,30 @@ const Index = () => {
 
       <main className="flex-1">
         <Hero {...heroContent} />
-        <Pain {...painContent} />
-        <Solution {...solutionContent} />
-        <Authority {...authorityContent} />
-        <ProductDetails {...detailsContent} />
-        <SocialProof {...testimonialsContent} />
-        <Pricing {...pricingContent} />
-        <FAQ {...faqContent} />
+        <RevealOnScroll>
+          <StatsBar {...statsContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <Pain {...painContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <Solution {...solutionContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <Authority {...authorityContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <ProductDetails {...detailsContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <SocialProof {...testimonialsContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <Pricing {...pricingContent} />
+        </RevealOnScroll>
+        <RevealOnScroll>
+          <FAQ {...faqContent} />
+        </RevealOnScroll>
       </main>
 
       <Footer {...footerContent} />

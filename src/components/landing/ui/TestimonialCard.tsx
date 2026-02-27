@@ -6,7 +6,7 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard = ({ quote, name, role, avatar }: TestimonialCardProps) => (
-  <div className="bg-card border border-border rounded-lg p-6 shadow-[var(--shadow-soft)] flex flex-col">
+  <div className="bg-card border border-border rounded-lg p-6 shadow-[var(--shadow-soft)] flex flex-col card-hover-glow">
     <blockquote className="text-foreground leading-relaxed flex-1 mb-4">
       "{quote}"
     </blockquote>
