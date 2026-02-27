@@ -26,11 +26,20 @@ interface Plan {
   highlighted: boolean;
 }
 
+interface TopicItem {
+  name: string;
+  features: string[];
+  price: string;
+  ctaHref: string;
+  badge?: string;
+}
+
 interface PricingProps {
   headline: string;
   plans: Plan[];
   periodLabels: string[];
   footnote?: string;
+  topics?: TopicItem[];
 }
 
 function PricingCard({
@@ -120,7 +129,69 @@ function PricingCard({
   );
 }
 
-const Pricing = ({ headline, plans, periodLabels, footnote }: PricingProps) => {
+function TopicCard({ topic }: { topic: TopicItem }) {
+  const highlighted = !!topic.badge;
+  return (
+    <div
+      className={`relative rounded-xl p-6 md:p-8 flex flex-col h-full card-hover-glow ${
+        highlighted
+          ? "bg-card border-2 border-accent shadow-[var(--shadow-elevated)]"
+          : "bg-card border border-border shadow-[var(--shadow-soft)]"
+      }`}
+    >
+      {highlighted && (
+        <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold bg-accent text-accent-foreground px-3 py-1 rounded-full whitespace-nowrap">
+          {topic.badge}
+        </span>
+      )}
+
+      <Heading as="h3" className="text-center !text-lg">
+        {topic.name}
+      </Heading>
+
+      <div className="mt-5 mb-1 text-center">
+        <span className="text-3xl font-bold text-foreground">
+          {topic.price}
+        </span>
+      </div>
+
+      <ul className="space-y-3 flex-1 my-6">
+        {topic.features.map((feature, idx) => (
+          <li
+            key={idx}
+            className="flex items-start gap-2.5 text-sm text-muted-foreground"
+          >
+            <svg
+              className="w-5 h-5 text-accent shrink-0 mt-0.5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <LandingButton
+        variant="outline"
+        href={topic.ctaHref}
+        className="w-full"
+        size="md"
+      >
+        Оплатить
+      </LandingButton>
+    </div>
+  );
+}
+
+const Pricing = ({ headline, plans, periodLabels, footnote, topics }: PricingProps) => {
   const tabItems = periodLabels.map((label, periodIndex) => ({
     label,
     content: (
@@ -138,6 +209,19 @@ const Pricing = ({ headline, plans, periodLabels, footnote }: PricingProps) => {
       </>
     ),
   }));
+
+  if (topics && topics.length > 0) {
+    tabItems.push({
+      label: "Отдельные темы",
+      content: (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto items-stretch">
+          {topics.map((topic, i) => (
+            <TopicCard key={i} topic={topic} />
+          ))}
+        </div>
+      ),
+    });
+  }
 
   return (
     <Section id="pricing">

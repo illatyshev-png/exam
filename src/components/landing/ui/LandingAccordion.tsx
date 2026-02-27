@@ -1,4 +1,26 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+
+const urlRegex = /(https?:\/\/[^\s,)]+)/g;
+
+function linkifyText(text: string): ReactNode {
+  const parts = text.split(urlRegex);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) =>
+    urlRegex.test(part) ? (
+      <a
+        key={i}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-accent hover:underline"
+      >
+        {part}
+      </a>
+    ) : (
+      part
+    )
+  );
+}
 
 interface AccordionItem {
   question: string;
@@ -39,7 +61,7 @@ const LandingAccordion = ({ items }: LandingAccordionProps) => {
               openIndex === i ? "max-h-96 pb-5" : "max-h-0"
             }`}
           >
-            <p className="text-muted-foreground leading-relaxed">{item.answer}</p>
+            <p className="text-muted-foreground leading-relaxed">{linkifyText(item.answer)}</p>
           </div>
         </div>
       ))}

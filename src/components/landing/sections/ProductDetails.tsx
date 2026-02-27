@@ -6,7 +6,6 @@ import LandingCard from "../ui/LandingCard";
 import SectionImage from "../ui/SectionImage";
 
 interface Feature {
-  icon?: string;
   name: string;
   detail: string;
 }
@@ -32,7 +31,14 @@ const ProductDetails = ({ headline, features, bonus }: ProductDetailsProps) => (
             key={i}
             className="bg-card border border-border rounded-lg p-6 shadow-[var(--shadow-soft)] card-hover-glow"
           >
-            <p className="font-semibold text-foreground mb-2 text-base">{f.icon && <>{f.icon}{" "}</>}{f.name}</p>
+            <div className="flex items-start gap-2 mb-2">
+              <span className="mt-0.5 text-accent shrink-0">
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <p className="font-semibold text-foreground text-base">{f.name}</p>
+            </div>
             <p className="text-sm text-muted-foreground leading-relaxed">{f.detail}</p>
           </div>
         ))}

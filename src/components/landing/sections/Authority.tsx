@@ -18,12 +18,15 @@ const Authority = ({ headline, groups, image }: AuthorityProps) => (
   <Section id="authority" variant="muted">
     <Container>
       <div className="max-w-4xl mx-auto">
-        <SectionImage src={image} alt={headline} className="mb-4" offsetPercent={33.33} />
+        <SectionImage src="/sections/authority.png" alt={headline} className="mb-4" offsetPercent={33.33} />
         <Heading as="h2" className="text-center mb-8">{headline}</Heading>
 
         <div className="grid md:grid-cols-2 gap-6">
           {groups.map((group, gi) => (
-            <div key={gi}>
+            <div
+              key={gi}
+              className={gi === groups.length - 1 && groups.length % 2 !== 0 ? "md:col-span-2 md:max-w-md md:mx-auto" : ""}
+            >
               <h3 className="text-base font-semibold text-foreground mb-2">
                 {gi + 1}. {group.title}
               </h3>

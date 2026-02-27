@@ -41,6 +41,7 @@ const FAQ = ({ headline, items, finalCta }: FAQProps) => (
         <LandingButton variant="accent" size="lg" href={finalCta.ctaHref}>
           {finalCta.ctaText}
         </LandingButton>
+        <SectionImage src="/sections/details.png" className="mt-8" />
       </Container>
     </Section>
   </>

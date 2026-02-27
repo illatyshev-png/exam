@@ -5,7 +5,7 @@
 // ============================================
 
 export const siteConfig = {
-  name: "Подготовка к экзамену",
+  name: "Материалы для самоподготовки к аттестационному экзамену в Минюсте",
   logo: null as string | null,
 };
 
@@ -14,7 +14,7 @@ export const navLinks = [
   { label: "Преимущества", href: "#details" },
   { label: "Об авторе", href: "#authority" },
   { label: "Цены", href: "#pricing" },
-  { label: "Вопросы", href: "#faq" },
+  { label: "ЧаВо", href: "#faq" },
 ];
 
 export const heroContent = {
@@ -98,10 +98,8 @@ export const authorityContent = {
     {
       title: "Фундамент юридического опыта",
       items: [
-        "Юрист в третьем поколении, работаю в юр. сфере с 2001 года.",
-        "С 2007 года возглавляю свой юр. бизнес.",
-        "Написал 270+ статей юр. тематики, провел под сотню юр. семинаров.",
-        "С 2002 активно занимаюсь маркетингом юруслуг.",
+        "Юрист в третьем поколении, работаю в юр. сфере с 2001 года, с 2007 года возглавляю свой юр. бизнес.",
+        "Написал 300+ статей юр. тематики, провел под сотню юр. семинаров, с 2002 активно занимаюсь маркетингом юруслуг.",
       ],
     },
     {
@@ -120,28 +118,24 @@ export const detailsContent = {
   headline: "Почему наши материалы работают",
   features: [
     {
-      icon: "🎁",
-      name: "Бонус: обновления и новые материалы — бесплатно на весь срок доступа",
+      name: "Начните прямо сейчас — доступ открывается сразу после оплаты",
       detail:
-        "Программа меняется? Получаете обновленные конспекты автоматически. Нашлись новые вопросы? Добавляем их в бот без доплат. Вы платите один раз и получаете актуальную базу на весь период подготовки.",
+        "Никаких ожиданий формирования группы или старта потока. Оплатили — получили доступ — начали готовиться. Каждый день промедления — это еще один день, когда вы могли бы тренироваться, но не делаете этого. Времени до экзамена меньше, чем вы думаете.",
     },
     {
-      icon: "🛡️",
       name: "Снижение стресса — вы точно знаете, ЧТО учить и КАК это проверить",
       detail:
         "Больше никакой паники в стиле «а вдруг я не то учу?». У вас есть четкая карта: конспекты покрывают все темы программы, бот проверяет знания. Вы видите прогресс и понимаете, где еще нужно подтянуть. Это как GPS для подготовки — вы всегда знаете, где находитесь.",
     },
     {
-      icon: "💪",
       name: "Подготовка «как для себя» — я сделал то, что сам хотел бы иметь",
       detail:
         "Это не продукт ради продукта. Я уже 3 года вижу, как люди проходят ад подготовки к экзамену и создал еще один инструмент, который облегчил бы жизнь! Поэтому здесь нет воды и лишних заумностей. Только то, что реально нужно на экзамене, только хардкор, только результат. В декабре 2025 я сам готовился к экзамену по этим материалам и сдал его!",
     },
     {
-      icon: "🚀",
-      name: "Начните прямо сейчас — доступ открывается сразу после оплаты",
+      name: "Бонус: обновления и новые материалы — бесплатно на весь срок доступа",
       detail:
-        "Никаких ожиданий формирования группы или старта потока. Оплатили — получили доступ — начали готовиться. Каждый день промедления — это еще один день, когда вы могли бы тренироваться, но не делаете этого. Времени до экзамена меньше, чем вы думаете.",
+        "Программа меняется? Получаете обновленные конспекты автоматически. Нашлись новые вопросы? Добавляем их в бот без доплат. Вы платите один раз и получаете актуальную базу на весь период подготовки.",
     },
   ],
   bonus: {
@@ -190,6 +184,14 @@ export interface PricingPlan {
   features: string[];
   tiers: PricingTier[];
   highlighted: boolean;
+}
+
+export interface TopicItem {
+  name: string;
+  features: string[];
+  price: string;
+  ctaHref: string;
+  badge?: string;
 }
 
 export const pricingContent = {
@@ -309,6 +311,111 @@ export const pricingContent = {
       ],
     },
   ] as PricingPlan[],
+  topics: [
+    {
+      name: "Гражданское законодательство",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блока «Гражданское законодательство»",
+        "Доступ на 3 мес.",
+      ],
+      price: "75 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-grazhdanskoe-zakonodatelstvo/?add-to-cart=3375",
+    },
+    {
+      name: "Трудовое законодательство",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блока «Трудовое законодательство»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-trudovoe-zakonodatelstvo/?add-to-cart=3376",
+    },
+    {
+      name: "Законодательство о гражданском судопроизводстве",
+      badge: "Новые материалы",
+      features: [
+        "Полные конспекты по вопросам блока «Законодательство о гражданском судопроизводстве»",
+        "Доступ на 3 мес.",
+      ],
+      price: "75 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-grazhdanskoe-sudoproizvodstvo/?add-to-cart=3377",
+    },
+    {
+      name: "Закон об исполнительном производстве",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блока «Закон об исполнительном производстве»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-ispolnitelnoe-proizvodstvo/?add-to-cart=3378",
+    },
+    {
+      name: "Закон об урегулировании неплатежеспособности",
+      badge: "Новые материалы",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блока «Закон об урегулировании неплатежеспособности»",
+        "Доступ на 3 мес.",
+      ],
+      price: "75 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-zakon-ob-uregulirovanii-neplatezhesposobnosti/?add-to-cart=3379",
+    },
+    {
+      name: "Закон о хозяйственных обществах",
+      features: [
+        "Полные и краткие/аудио конспекты по всем вопросам блока «Закон о хозяйственных обществах»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-zakon-o-hozyajstvennyh-obshhestvah/?add-to-cart=3380",
+    },
+    {
+      name: "Инвестиции и концессии",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блоков «Инвестиции и концессии»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-investiczii-i-konczessii/?add-to-cart=3381",
+    },
+    {
+      name: "Уголовное и административное право",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блоков «Уголовное и административное право»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-ugolovnoe-i-administrativnoe-pravo/?add-to-cart=3382",
+    },
+    {
+      name: "Легализация доходов и лицензирование",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блоков «Легализация доходов и лицензирование»",
+        "Доступ на 3 мес.",
+      ],
+      price: "50 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-legalizacziya-dohodov-i-liczenzirovanie/?add-to-cart=3383",
+    },
+    {
+      name: "Прочие темы",
+      badge: "Концентрат информации",
+      features: [
+        "Полные и краткие/аудио конспекты по вопросам блоков: «Налоговое право», «Конституционное право», «Правила оказания юридических услуг», «Правила профессиональной этики», «Указ о повышении эффективности контрольной (надзорной) деятельности»",
+        "Доступ на 3 мес.",
+      ],
+      price: "75 руб.",
+      ctaHref:
+        "https://dogovor.by/product/konspekty-dlya-podgotovki-k-attestaczionnomu-ekzamenu-v-minyust-prochie-temy/?add-to-cart=3384",
+    },
+  ] as TopicItem[],
 };
 
 export const faqContent = {

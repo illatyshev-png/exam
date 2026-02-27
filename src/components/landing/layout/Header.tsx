@@ -86,7 +86,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
         style={{ transform: `scaleX(${scrollProgress})` }}
       />
       <Container>
-        <nav className="flex h-16 items-center justify-between gap-4">
+        <nav className="flex min-h-16 items-center justify-between gap-4 py-2">
           {/* Logo */}
           <a
             href="#"
@@ -94,12 +94,12 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="flex shrink-0 items-center gap-2"
+            className="flex items-center gap-2 max-w-[40%]"
           >
             {logo ? (
               <img src={logo} alt={siteName} className="h-8 w-auto" />
             ) : (
-              <span className="text-xl font-bold tracking-tight text-foreground">
+              <span className="text-base font-bold leading-tight tracking-tight text-foreground">
                 {siteName}
               </span>
             )}
