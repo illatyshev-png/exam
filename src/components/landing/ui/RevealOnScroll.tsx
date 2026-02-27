@@ -21,7 +21,7 @@ const RevealOnScroll = ({ children, className }: RevealOnScrollProps) => {
           observer.disconnect();
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.15 },
     );
 
     observer.observe(el);
