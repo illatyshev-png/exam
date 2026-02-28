@@ -4,6 +4,9 @@
 // No component files need to be modified.
 // ============================================
 
+/** Базовый URL лэндинга */
+export const SITE_URL = "https://exam.ilat.info";
+
 export const siteConfig = {
   name: "Группа для юристов по подготовке к экзамену в Министерстве юстиции",
   logo: null as string | null,
