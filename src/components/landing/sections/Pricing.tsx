@@ -13,6 +13,7 @@ interface PricingTier {
   price: string;
   oldPrice?: string;
   note?: string;
+  belowCtaNote?: string;
   ctaText: string;
   ctaHref: string;
   badge?: string;
@@ -126,6 +127,9 @@ function PricingCard({
       >
         {tier.ctaText}
       </LandingButton>
+      {tier.belowCtaNote && (
+        <p className="text-xs text-muted-foreground text-center mt-3">{tier.belowCtaNote}</p>
+      )}
     </div>
   );
 }

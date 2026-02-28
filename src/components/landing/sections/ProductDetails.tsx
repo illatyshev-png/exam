@@ -3,7 +3,6 @@ import Section from "../ui/Section";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import LandingCard from "../ui/LandingCard";
-import SectionImage from "../ui/SectionImage";
 
 interface Feature {
   name: string;
@@ -12,6 +11,7 @@ interface Feature {
 
 interface ProductDetailsProps {
   headline: string;
+  image?: string | null;
   features: Feature[];
   bonus: {
     title: string;
@@ -19,14 +19,28 @@ interface ProductDetailsProps {
   };
 }
 
-const ProductDetails = ({ headline, features, bonus }: ProductDetailsProps) => (
+const ProductDetails = ({ headline, image, features, bonus }: ProductDetailsProps) => (
   <Section id="details">
     <Container className="max-w-4xl mx-auto">
-      <SectionImage src="/sections/details.png" className="hidden md:block mb-4" offsetPercent={50} />
-      <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
-        <img src="/sections/details.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
-        <Heading as="h2" className="md:text-center">{headline}</Heading>
+      <div className="mb-6">
+        {image ? (
+          <img
+            src={image}
+            alt="Скриншот встречи группы в Zoom"
+            className="w-full max-w-lg aspect-video object-cover rounded-xl mx-auto"
+          />
+        ) : (
+          <div className="w-full max-w-lg aspect-video rounded-xl border-2 border-dashed border-border flex items-center justify-center bg-muted/50 mx-auto">
+            <div className="text-center text-muted-foreground/50 px-4">
+              <svg className="w-10 h-10 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0 0 22.5 18.75V5.25A2.25 2.25 0 0 0 20.25 3H3.75A2.25 2.25 0 0 0 1.5 5.25v13.5A2.25 2.25 0 0 0 3.75 21Z" />
+              </svg>
+              <span className="text-xs">Скриншот из Zoom</span>
+            </div>
+          </div>
+        )}
       </div>
+      <Heading as="h2" className="text-center mb-10">{headline}</Heading>
 
       <div className="grid sm:grid-cols-2 gap-5 mb-12">
         {features.map((f, i) => (

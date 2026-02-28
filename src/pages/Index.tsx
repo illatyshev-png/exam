@@ -2,7 +2,7 @@ import Header from "../components/landing/layout/Header";
 import Footer from "../components/landing/layout/Footer";
 import Hero from "../components/landing/sections/Hero";
 import StatsBar from "../components/landing/sections/StatsBar";
-import Pain from "../components/landing/sections/Pain";
+import Comparison from "../components/landing/sections/Comparison";
 import Solution from "../components/landing/sections/Solution";
 import Authority from "../components/landing/sections/Authority";
 import ProductDetails from "../components/landing/sections/ProductDetails";
@@ -16,7 +16,7 @@ import {
   navLinks,
   heroContent,
   statsContent,
-  painContent,
+  comparisonContent,
   solutionContent,
   authorityContent,
   detailsContent,
@@ -42,7 +42,7 @@ const Index = () => {
           <StatsBar {...statsContent} />
         </RevealOnScroll>
         <RevealOnScroll>
-          <Pain {...painContent} />
+          <Comparison {...comparisonContent} />
         </RevealOnScroll>
         <RevealOnScroll>
           <Solution {...solutionContent} />

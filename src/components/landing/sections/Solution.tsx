@@ -26,9 +26,9 @@ const Solution = ({ headline, description, benefits, highlightCard }: SolutionPr
   <Section id="solution">
     <Container>
       <div className="max-w-3xl mx-auto md:text-center mb-12">
-        <SectionImage src="/sections/solution.png" className="hidden md:block mb-4" offsetPercent={16.67} />
+        <SectionImage src="/sections/что получает.jpg" className="hidden md:block mb-4" offsetPercent={16.67} />
         <div className="flex items-center gap-3 mb-4 md:block">
-          <img src="/sections/solution.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <img src="/sections/что получает.jpg" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
           <Heading as="h2">{headline}</Heading>
         </div>
         <Text variant="lead">{description}</Text>

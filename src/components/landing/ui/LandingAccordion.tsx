@@ -1,25 +1,29 @@
 import { useState, type ReactNode } from "react";
 
-const urlPattern = /(https?:\/\/[^\s,)]+)/g;
-
 function linkifyText(text: string): ReactNode {
-  const parts = text.split(urlPattern);
-  if (parts.length === 1) return text;
-  return parts.map((part, i) =>
-    /^https?:\/\//.test(part) ? (
-      <a
-        key={i}
-        href={part}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-accent hover:underline"
-      >
-        {part}
-      </a>
-    ) : (
-      part
-    )
-  );
+  const pattern =
+    /\[([^\]]+)\]\((https?:\/\/[^)]+)\)|(https?:\/\/[^\s,)]+)|([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const parts: ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = pattern.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
+
+    if (match[1]) {
+      parts.push(<a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{match[1]}</a>);
+    } else if (match[3]) {
+      parts.push(<a key={match.index} href={match[3]} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{match[3]}</a>);
+    } else if (match[4]) {
+      parts.push(<a key={match.index} href={`mailto:${match[4]}`} className="text-accent hover:underline">{match[4]}</a>);
+    }
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex === 0) return text;
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex));
+  return parts;
 }
 
 interface AccordionItem {

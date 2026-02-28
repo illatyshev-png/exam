@@ -16,7 +16,7 @@ const Pain = ({ intro, struggles }: PainProps) => (
       <div className="flex items-center gap-3 mb-4 md:block">
         <img src="/sections/pain.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
         <Heading as="h2" className="md:text-center">
-          Почему большинство юристов не проходят аттестацию?
+          Почему готовиться к экзамену в одиночку — плохая идея?
         </Heading>
       </div>
       <Text variant="lead" className="text-center mb-10">
