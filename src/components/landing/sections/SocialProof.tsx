@@ -83,10 +83,10 @@ const SocialProof = ({
       <Container>
         <SectionImage src="/sections/testimonials.png" className="hidden md:block mb-4" offsetPercent={66.67} />
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
-          <img src="/sections/testimonials.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
           <Heading as="h2" className="md:text-center">
             {headline}
           </Heading>
+          <img src="/sections/testimonials.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
         </div>
 
         <div className="relative max-w-3xl mx-auto">

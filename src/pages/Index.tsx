@@ -26,24 +26,6 @@ import {
   footerContent,
 } from "../content/landing";
 
-{/* 
-  ============================================
-  ANALYTICS PLACEHOLDERS
-  ============================================
-  
-  Yandex Metrika — uncomment and add your counter ID:
-  useEffect(() => {
-    (function(m,e,t,r,i,k,a){...})(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    ym(XXXXXXXX, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
-  }, []);
-
-  Meta Pixel — uncomment and add your pixel ID:
-  useEffect(() => {
-    !function(f,b,e,v,n,t,s){...}(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'XXXXXXXXXXXXXXX');
-    fbq('track', 'PageView');
-  }, []);
-*/}
 
 const Index = () => {
   return (

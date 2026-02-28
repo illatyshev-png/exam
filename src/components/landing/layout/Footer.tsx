@@ -3,10 +3,9 @@ import Container from "../ui/Container";
 interface FooterProps {
   copyright: string;
   links: { label: string; href: string }[];
-  contact: { email: string };
 }
 
-const Footer = ({ copyright, links, contact }: FooterProps) => (
+const Footer = ({ copyright, links }: FooterProps) => (
   <footer className="border-t border-border bg-muted py-12">
     <Container>
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
@@ -24,12 +23,6 @@ const Footer = ({ copyright, links, contact }: FooterProps) => (
             </a>
           ))}
         </div>
-        <a
-          href={`mailto:${contact.email}`}
-          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          {contact.email}
-        </a>
       </div>
     </Container>
   </footer>

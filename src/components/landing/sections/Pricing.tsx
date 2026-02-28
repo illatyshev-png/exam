@@ -36,6 +36,7 @@ interface TopicItem {
 
 interface PricingProps {
   headline: string;
+  subheadline?: string;
   plans: Plan[];
   periodLabels: string[];
   footnote?: string;
@@ -191,7 +192,7 @@ function TopicCard({ topic }: { topic: TopicItem }) {
   );
 }
 
-const Pricing = ({ headline, plans, periodLabels, footnote, topics }: PricingProps) => {
+const Pricing = ({ headline, subheadline, plans, periodLabels, footnote, topics }: PricingProps) => {
   const tabItems = periodLabels.map((label, periodIndex) => ({
     label,
     content: (
@@ -229,9 +230,16 @@ const Pricing = ({ headline, plans, periodLabels, footnote, topics }: PricingPro
         <SectionImage src="/sections/pricing.png" className="hidden md:block mb-4" offsetPercent={83.33} />
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
           <img src="/sections/pricing.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
-          <Heading as="h2" className="md:text-center">
-            {headline}
-          </Heading>
+          <div>
+            <Heading as="h2" className="md:text-center">
+              {headline}
+            </Heading>
+            {subheadline && (
+              <Text variant="lead" className="md:text-center mt-3 max-w-2xl md:mx-auto">
+                {subheadline}
+              </Text>
+            )}
+          </div>
         </div>
 
         <AnimatedTabs

@@ -30,8 +30,8 @@ const FAQ = ({ headline, items, finalCta }: FAQProps) => (
       </Container>
       <Container className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
-          <img src="/sections/faq.jpeg" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
           <Heading as="h2" className="md:text-center">{headline}</Heading>
+          <img src="/sections/faq.jpeg" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
         </div>
         <LandingAccordion items={items} />
       </Container>
