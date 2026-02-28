@@ -143,7 +143,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
             className="hidden md:inline-flex"
             onClick={() => scrollTo("#pricing")}
           >
-            Начать
+            Присоединиться
           </Button>
 
           {/* Mobile menu */}
@@ -197,7 +197,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
                   className="w-full"
                   onClick={() => scrollTo("#pricing")}
                 >
-                  Начать
+                  Присоединиться
                 </Button>
               </nav>
             </SheetContent>
