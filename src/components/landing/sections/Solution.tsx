@@ -3,6 +3,7 @@ import Section from "../ui/Section";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import LandingCard from "../ui/LandingCard";
+import LandingButton from "../ui/LandingButton";
 import SectionImage from "../ui/SectionImage";
 
 interface Benefit {
@@ -16,13 +17,15 @@ interface SolutionProps {
   headline: string;
   description: string;
   benefits: Benefit[];
+  ctaText?: string;
+  ctaHref?: string;
   highlightCard: {
     title: string;
     items: string[];
   };
 }
 
-const Solution = ({ headline, description, benefits, highlightCard }: SolutionProps) => (
+const Solution = ({ headline, description, benefits, ctaText, ctaHref, highlightCard }: SolutionProps) => (
   <Section id="solution">
     <Container>
       <div className="max-w-3xl mx-auto md:text-center mb-12">
@@ -84,6 +87,13 @@ const Solution = ({ headline, description, benefits, highlightCard }: SolutionPr
           </ul>
         </LandingCard>
       </div>
+      {ctaText && ctaHref && (
+        <div className="text-center mt-12">
+          <LandingButton variant="accent" size="lg" href={ctaHref}>
+            {ctaText}
+          </LandingButton>
+        </div>
+      )}
     </Container>
   </Section>
 );

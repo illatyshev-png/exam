@@ -3,6 +3,7 @@ import Section from "../ui/Section";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import LandingCard from "../ui/LandingCard";
+import LandingButton from "../ui/LandingButton";
 
 interface Feature {
   name: string;
@@ -13,13 +14,15 @@ interface ProductDetailsProps {
   headline: string;
   image?: string | null;
   features: Feature[];
+  ctaText?: string;
+  ctaHref?: string;
   bonus: {
     title: string;
     description: string;
   };
 }
 
-const ProductDetails = ({ headline, image, features, bonus }: ProductDetailsProps) => (
+const ProductDetails = ({ headline, image, features, ctaText, ctaHref, bonus }: ProductDetailsProps) => (
   <Section id="details">
     <Container className="max-w-4xl mx-auto">
       <div className="mb-6">
@@ -71,6 +74,13 @@ const ProductDetails = ({ headline, image, features, bonus }: ProductDetailsProp
           <Text className="text-foreground/80 font-medium">{bonus.description}</Text>
         </LandingCard>
       </div>
+      {ctaText && ctaHref && (
+        <div className="text-center mt-12">
+          <LandingButton variant="accent" size="lg" href={ctaHref}>
+            {ctaText}
+          </LandingButton>
+        </div>
+      )}
     </Container>
   </Section>
 );

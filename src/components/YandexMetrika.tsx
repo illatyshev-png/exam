@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
-const METRIKA_ID = 107047350;
+const METRIKA_ID = 107051380;
 const SCRIPT_SRC = `https://mc.yandex.ru/metrika/tag.js?id=${METRIKA_ID}`;
 
 declare global {
@@ -34,12 +34,14 @@ const YandexMetrika = () => {
     loadMetrikaScript();
 
     window.ym?.(METRIKA_ID, "init", {
-      defer: true,
+      ssr: true,
       webvisor: true,
       clickmap: true,
-      trackLinks: true,
-      accurateTrackBounce: true,
       ecommerce: "dataLayer",
+      referrer: document.referrer,
+      url: location.href,
+      accurateTrackBounce: true,
+      trackLinks: true,
     });
   }, []);
 

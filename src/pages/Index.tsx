@@ -1,5 +1,6 @@
 import Header from "../components/landing/layout/Header";
 import Footer from "../components/landing/layout/Footer";
+import WelcomePopup from "../components/WelcomePopup";
 import Hero from "../components/landing/sections/Hero";
 import StatsBar from "../components/landing/sections/StatsBar";
 import Comparison from "../components/landing/sections/Comparison";
@@ -10,6 +11,7 @@ import SocialProof from "../components/landing/sections/SocialProof";
 import Pricing from "../components/landing/sections/Pricing";
 import FAQ from "../components/landing/sections/FAQ";
 import RevealOnScroll from "../components/landing/ui/RevealOnScroll";
+import ScrollToTop from "../components/landing/ui/ScrollToTop";
 
 import {
   siteConfig,
@@ -30,6 +32,7 @@ import {
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <WelcomePopup />
       <Header
         siteName={siteConfig.name}
         logo={siteConfig.logo}
@@ -65,6 +68,7 @@ const Index = () => {
       </main>
 
       <Footer {...footerContent} />
+      <ScrollToTop />
     </div>
   );
 };

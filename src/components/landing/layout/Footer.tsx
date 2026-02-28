@@ -2,7 +2,7 @@ import Container from "../ui/Container";
 
 interface FooterProps {
   copyright: string;
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; highlight?: boolean }[];
 }
 
 const Footer = ({ copyright, links }: FooterProps) => (
@@ -17,7 +17,11 @@ const Footer = ({ copyright, links }: FooterProps) => (
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className={`text-sm transition-colors ${
+                link.highlight
+                  ? "font-semibold text-foreground bg-background/80 px-3 py-1.5 rounded-md border border-border hover:bg-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {link.label}
             </a>

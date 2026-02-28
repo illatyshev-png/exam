@@ -22,15 +22,15 @@ export const heroContent = {
     "60% участников групп сдают экзамен с первого раза — при средней результативности в 20–30%",
   subheadline:
     "Аттестация в Минюсте — это не просто тест. Три сотни тем, десятки билетов, формулировки «в духе Минюста» и часто ощущение полной растерянности на устном экзамене. Участие в группе подготовки поможет вам пройти этот путь быстро, уверенно и результативно.",
-  ctaText: "Присоединиться к 19-й группе",
+  ctaText: "Присоединиться к группе",
   ctaHref: "#pricing",
 };
 
 export const statsContent = {
   items: [
     { value: 18, label: "групп", suffix: "", prefix: "", sublabel: "проведено" },
-    { value: 100, label: "человек", suffix: "+", prefix: "", sublabel: "подготовились" },
-    { value: 60, label: "сдают с 1 раза", suffix: "%", prefix: "", sublabel: "участников" },
+    { value: 103, label: "человека", suffix: "", prefix: "", sublabel: "подготовились" },
+    { value: 60, label: "участников", suffix: "%", prefix: "", sublabel: "сдают с 1 раза" },
     { value: 350, label: "тестовых вопросов", suffix: "+", prefix: "", sublabel: "решаем" },
   ],
 };
@@ -66,7 +66,7 @@ export const comparisonContent = {
         "Работа в группе помогает структурировать знания, выявить пробелы и повысить уверенность в своих силах для успешной сдачи экзамена.",
     },
   ],
-  ctaText: "Присоединиться к 19-й группе",
+  ctaText: "Присоединиться к группе",
   ctaHref: "#pricing",
 };
 
@@ -106,6 +106,8 @@ export const solutionContent = {
         "Моральная и эмоциональная поддержка от группы, новые знакомства, деловые связи и опыт участников.",
     },
   ],
+  ctaText: "Присоединиться к группе",
+  ctaHref: "#pricing",
   highlightCard: {
     title: "Успешные методики подготовки",
     items: [
@@ -181,6 +183,8 @@ export const detailsContent = {
         "Для повышения эффективности подготовки участников групп применяются различные техники из коучинга, которые помогают сохранять фокус и мотивацию.",
     },
   ],
+  ctaText: "Присоединиться к группе",
+  ctaHref: "#pricing",
   bonus: {
     title: "19-я группа стартует в марте 2026",
     description:
@@ -359,8 +363,8 @@ export const faqContent = {
     headline: "Присоединяйтесь к 19-й группе!",
     description:
       "Сейчас я работаю с двумя группами, набранными в январе. Не упустите своё место — количество участников ограничено.",
-    ctaText: "Написать и присоединиться",
-    ctaHref: "https://t.me/IlyaLatyshev",
+    ctaText: "Присоединиться к группе",
+    ctaHref: "#pricing",
   },
 };
 
@@ -369,15 +373,16 @@ export const footerContent = {
   links: [
     {
       label: "Публичная оферта",
-      href: "http://www.ilat.info/oferta-mastermind/",
+      href: "https://www.ilat.info/oferta-mastermind/",
     },
     {
       label: "Правила мастермайнд групп",
-      href: "http://www.ilat.info/rules-mastermind/",
+      href: "https://www.ilat.info/rules-mastermind/",
     },
     {
       label: "Материалы для самостоятельной подготовки",
       href: "https://exam2.ilat.info/",
+      highlight: true,
     },
     { label: "Связаться с нами", href: "https://t.me/IlyaLatyshev" },
   ],
