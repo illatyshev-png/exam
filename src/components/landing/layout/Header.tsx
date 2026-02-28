@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,7 +7,6 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import Container from "../ui/Container";
 
@@ -62,14 +61,21 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
 
   const scrollTo = useCallback(
     (href: string) => {
+      const wasOpen = mobileOpen;
       setMobileOpen(false);
       const id = href.replace("#", "");
       const el = document.getElementById(id);
       if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (wasOpen) {
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 350);
+        } else {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
     },
-    [],
+    [mobileOpen],
   );
 
   return (
@@ -141,18 +147,17 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
           </Button>
 
           {/* Mobile menu */}
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                aria-label="Открыть меню"
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-            </SheetTrigger>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            aria-label="Открыть меню"
+            onClick={() => setMobileOpen(true)}
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
 
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetContent side="right" className="w-72 sm:w-80">
               <SheetHeader className="text-left">
                 <SheetTitle>

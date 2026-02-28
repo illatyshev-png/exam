@@ -1,12 +1,12 @@
 import { useState, type ReactNode } from "react";
 
-const urlRegex = /(https?:\/\/[^\s,)]+)/g;
+const urlPattern = /(https?:\/\/[^\s,)]+)/g;
 
 function linkifyText(text: string): ReactNode {
-  const parts = text.split(urlRegex);
+  const parts = text.split(urlPattern);
   if (parts.length === 1) return text;
   return parts.map((part, i) =>
-    urlRegex.test(part) ? (
+    /^https?:\/\//.test(part) ? (
       <a
         key={i}
         href={part}

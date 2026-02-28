@@ -226,10 +226,13 @@ const Pricing = ({ headline, plans, periodLabels, footnote, topics }: PricingPro
   return (
     <Section id="pricing">
       <Container>
-        <SectionImage src="/sections/pricing.png" className="mb-4" offsetPercent={83.33} />
-        <Heading as="h2" className="text-center mb-10">
-          {headline}
-        </Heading>
+        <SectionImage src="/sections/pricing.png" className="hidden md:block mb-4" offsetPercent={83.33} />
+        <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
+          <img src="/sections/pricing.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <Heading as="h2" className="md:text-center">
+            {headline}
+          </Heading>
+        </div>
 
         <AnimatedTabs
           items={tabItems}

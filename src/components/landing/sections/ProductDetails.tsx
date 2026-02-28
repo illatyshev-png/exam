@@ -22,8 +22,11 @@ interface ProductDetailsProps {
 const ProductDetails = ({ headline, features, bonus }: ProductDetailsProps) => (
   <Section id="details">
     <Container className="max-w-4xl mx-auto">
-      <SectionImage src="/sections/details.png" className="mb-4" offsetPercent={50} />
-      <Heading as="h2" className="text-center mb-10">{headline}</Heading>
+      <SectionImage src="/sections/details.png" className="hidden md:block mb-4" offsetPercent={50} />
+      <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
+        <img src="/sections/details.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+        <Heading as="h2" className="md:text-center">{headline}</Heading>
+      </div>
 
       <div className="grid sm:grid-cols-2 gap-5 mb-12">
         {features.map((f, i) => (

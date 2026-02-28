@@ -12,10 +12,13 @@ interface PainProps {
 const Pain = ({ intro, struggles }: PainProps) => (
   <Section id="pain" variant="muted">
     <Container className="max-w-3xl mx-auto">
-      <SectionImage src="/sections/pain.png" className="mb-4" offsetPercent={0} />
-      <Heading as="h2" className="text-center mb-4">
-        Почему большинство юристов не проходят аттестацию?
-      </Heading>
+      <SectionImage src="/sections/pain.png" className="hidden md:block mb-4" offsetPercent={0} />
+      <div className="flex items-center gap-3 mb-4 md:block">
+        <img src="/sections/pain.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+        <Heading as="h2" className="md:text-center">
+          Почему большинство юристов не проходят аттестацию?
+        </Heading>
+      </div>
       <Text variant="lead" className="text-center mb-10">
         {intro}
       </Text>

@@ -81,10 +81,13 @@ const SocialProof = ({
   return (
     <Section id="testimonials" variant="muted">
       <Container>
-        <SectionImage src="/sections/testimonials.png" className="mb-4" offsetPercent={66.67} />
-        <Heading as="h2" className="text-center mb-10">
-          {headline}
-        </Heading>
+        <SectionImage src="/sections/testimonials.png" className="hidden md:block mb-4" offsetPercent={66.67} />
+        <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
+          <img src="/sections/testimonials.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <Heading as="h2" className="md:text-center">
+            {headline}
+          </Heading>
+        </div>
 
         <div className="relative max-w-3xl mx-auto">
           <div className="overflow-hidden rounded-lg bg-muted/30">
@@ -98,6 +101,7 @@ const SocialProof = ({
                     src={src}
                     alt={`Отзыв ${i + 1}`}
                     className="max-w-full max-h-[70vh] object-contain rounded-lg"
+                    loading={i === 0 ? "eager" : "lazy"}
                     draggable={false}
                   />
                 </div>
@@ -108,7 +112,7 @@ const SocialProof = ({
           {/* Navigation arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+            className="absolute left-1 top-1/2 -translate-y-1/2 md:left-0 md:-translate-x-1/2 w-10 h-10 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors"
             aria-label="Предыдущий отзыв"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -123,7 +127,7 @@ const SocialProof = ({
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors"
+            className="absolute right-1 top-1/2 -translate-y-1/2 md:right-0 md:translate-x-1/2 w-10 h-10 rounded-full bg-card border border-border shadow-md flex items-center justify-center text-foreground hover:bg-muted transition-colors"
             aria-label="Следующий отзыв"
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

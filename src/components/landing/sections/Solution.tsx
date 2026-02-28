@@ -25,9 +25,12 @@ interface SolutionProps {
 const Solution = ({ headline, description, benefits, highlightCard }: SolutionProps) => (
   <Section id="solution">
     <Container>
-      <div className="max-w-3xl mx-auto text-center mb-12">
-        <SectionImage src="/sections/solution.png" className="mb-4" offsetPercent={16.67} />
-        <Heading as="h2" className="mb-4">{headline}</Heading>
+      <div className="max-w-3xl mx-auto md:text-center mb-12">
+        <SectionImage src="/sections/solution.png" className="hidden md:block mb-4" offsetPercent={16.67} />
+        <div className="flex items-center gap-3 mb-4 md:block">
+          <img src="/sections/solution.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <Heading as="h2">{headline}</Heading>
+        </div>
         <Text variant="lead">{description}</Text>
       </div>
 

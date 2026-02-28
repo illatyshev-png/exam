@@ -25,11 +25,14 @@ interface FAQProps {
 const FAQ = ({ headline, items, finalCta }: FAQProps) => (
   <>
     <Section id="faq" variant="muted">
-      <Container className="max-w-5xl mx-auto">
+      <Container className="max-w-5xl mx-auto hidden md:block">
         <SectionImage src="/sections/faq.jpeg" className="mb-4" offsetPercent={100} />
       </Container>
       <Container className="max-w-3xl mx-auto">
-        <Heading as="h2" className="text-center mb-10">{headline}</Heading>
+        <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
+          <img src="/sections/faq.jpeg" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <Heading as="h2" className="md:text-center">{headline}</Heading>
+        </div>
         <LandingAccordion items={items} />
       </Container>
     </Section>

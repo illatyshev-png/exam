@@ -470,11 +470,11 @@ export const footerContent = {
   links: [
     {
       label: "Оферта на конспекты",
-      href: "http://www.ilat.info/wp-content/uploads/2025/11/%D0%9F%D1%83%D0%B1%D0%BB%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0-%D0%AE%D0%9A%D0%98%D0%9B-%D0%BD%D0%B0-%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B-dogovorby-01-11-2025.pdf",
+      href: "https://www.ilat.info/wp-content/uploads/2025/11/%D0%9F%D1%83%D0%B1%D0%BB%D0%B8%D1%87%D0%BD%D0%B0%D1%8F-%D0%BE%D1%84%D0%B5%D1%80%D1%82%D0%B0-%D0%AE%D0%9A%D0%98%D0%9B-%D0%BD%D0%B0-%D0%BC%D0%B0%D1%82%D0%B5%D1%80%D0%B8%D0%B0%D0%BB%D1%8B-dogovorby-01-11-2025.pdf",
     },
     {
       label: "Оферта на бота",
-      href: "http://www.ilat.info/wp-content/uploads/2025/11/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0_%D0%B1%D0%BE%D1%82_2025.pdf",
+      href: "https://www.ilat.info/wp-content/uploads/2025/11/%D0%9E%D1%84%D0%B5%D1%80%D1%82%D0%B0_%D0%B1%D0%BE%D1%82_2025.pdf",
     },
     { label: "Телеграм", href: "https://t.me/IlyaLatyshev" },
   ],
