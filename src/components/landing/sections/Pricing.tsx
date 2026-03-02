@@ -231,9 +231,9 @@ const Pricing = ({ headline, subheadline, plans, periodLabels, footnote, topics 
   return (
     <Section id="pricing">
       <Container>
-        <SectionImage src="/sections/pricing.png" className="hidden md:block mb-4" offsetPercent={83.33} />
+        <SectionImage src="/sections/pricing.png" alt="Стоимость участия в группе подготовки" className="hidden md:block mb-4" offsetPercent={83.33} />
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
-          <img src="/sections/pricing.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <img src="/sections/pricing.png" alt="Стоимость участия в группе подготовки" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
           <div>
             <Heading as="h2" className="md:text-center">
               {headline}

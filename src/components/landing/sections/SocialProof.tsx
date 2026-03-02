@@ -81,12 +81,12 @@ const SocialProof = ({
   return (
     <Section id="testimonials" variant="muted">
       <Container>
-        <SectionImage src="/sections/testimonials.png" className="hidden md:block mb-4" offsetPercent={66.67} />
+        <SectionImage src="/sections/testimonials.png" alt="Отзывы участников группы подготовки" className="hidden md:block mb-4" offsetPercent={66.67} />
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
           <Heading as="h2" className="md:text-center">
             {headline}
           </Heading>
-          <img src="/sections/testimonials.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <img src="/sections/testimonials.png" alt="Отзывы участников группы подготовки" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
         </div>
 
         <div className="relative max-w-3xl mx-auto">
@@ -99,7 +99,7 @@ const SocialProof = ({
                 <div key={i} className="w-full shrink-0 flex items-center justify-center max-h-[70vh]">
                   <img
                     src={src}
-                    alt={`Отзыв ${i + 1}`}
+                    alt={`Отзыв участника группы подготовки к экзамену в Минюсте ${i + 1}`}
                     className="max-w-full max-h-[70vh] object-contain rounded-lg"
                     loading={i === 0 ? "eager" : "lazy"}
                     draggable={false}

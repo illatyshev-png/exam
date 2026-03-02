@@ -13,7 +13,7 @@ const TestimonialCard = ({ quote, name, role, avatar }: TestimonialCardProps) =>
     <div className="flex items-center gap-3 pt-4 border-t border-border">
       <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-sm font-semibold text-muted-foreground overflow-hidden">
         {avatar ? (
-          <img src={avatar} alt={name} className="w-full h-full object-cover" />
+          <img src={avatar} alt={`Фото ${name}`} className="w-full h-full object-cover" />
         ) : (
           name.charAt(0)
         )}

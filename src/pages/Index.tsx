@@ -12,6 +12,7 @@ import Pricing from "../components/landing/sections/Pricing";
 import FAQ from "../components/landing/sections/FAQ";
 import RevealOnScroll from "../components/landing/ui/RevealOnScroll";
 import ScrollToTop from "../components/landing/ui/ScrollToTop";
+import StructuredData from "../components/StructuredData";
 
 import {
   siteConfig,
@@ -32,6 +33,7 @@ import {
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <StructuredData />
       <WelcomePopup />
       <Header
         siteName={siteConfig.name}

@@ -18,9 +18,9 @@ const Authority = ({ headline, groups, image }: AuthorityProps) => (
   <Section id="authority" variant="muted">
     <Container>
       <div className="max-w-4xl mx-auto">
-        <SectionImage src="/sections/authority.png" alt={headline} className="hidden md:block mb-4" offsetPercent={33.33} />
+        <SectionImage src="/sections/authority.png" alt="Илья Латышев - автор курса подготовки к экзамену" className="hidden md:block mb-4" offsetPercent={33.33} />
         <div className="flex items-center gap-3 mb-6 md:block md:mb-8">
-          <img src="/sections/authority.png" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <img src="/sections/authority.png" alt="Илья Латышев - автор курса подготовки к экзамену" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
           <Heading as="h2" className="md:text-center">{headline}</Heading>
         </div>
 

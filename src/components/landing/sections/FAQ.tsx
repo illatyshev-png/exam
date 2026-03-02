@@ -26,12 +26,12 @@ const FAQ = ({ headline, items, finalCta }: FAQProps) => (
   <>
     <Section id="faq" variant="muted">
       <Container className="max-w-5xl mx-auto hidden md:block">
-        <SectionImage src="/sections/faq.jpeg" className="mb-4" offsetPercent={100} />
+        <SectionImage src="/sections/faq.jpeg" alt="Часто задаваемые вопросы о группе подготовки" className="mb-4" offsetPercent={100} />
       </Container>
       <Container className="max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-6 md:block md:mb-10">
           <Heading as="h2" className="md:text-center">{headline}</Heading>
-          <img src="/sections/faq.jpeg" alt="" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
+          <img src="/sections/faq.jpeg" alt="Часто задаваемые вопросы о группе подготовки" className="w-14 h-14 rounded-lg object-cover shrink-0 md:hidden" />
         </div>
         <LandingAccordion items={items} />
       </Container>
@@ -44,7 +44,7 @@ const FAQ = ({ headline, items, finalCta }: FAQProps) => (
         <LandingButton variant="accent" size="lg" href={finalCta.ctaHref}>
           {finalCta.ctaText}
         </LandingButton>
-        <SectionImage src="/sections/details.png" className="mt-8" />
+        <SectionImage src="/sections/details.png" alt="Детали программы подготовки к экзамену" className="mt-8" />
       </Container>
     </Section>
   </>

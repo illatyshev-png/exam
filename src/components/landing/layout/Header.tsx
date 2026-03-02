@@ -101,9 +101,10 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
             className="flex items-center gap-2 max-w-[40%]"
+            aria-label="На главную"
           >
             {logo ? (
-              <img src={logo} alt={siteName} className="h-8 w-auto" />
+              <img src={logo} alt={`Логотип ${siteName}`} className="h-8 w-auto" />
             ) : (
               <span className="text-base font-bold leading-tight tracking-tight text-foreground">
                 {siteName}
@@ -162,7 +163,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
               <SheetHeader className="text-left">
                 <SheetTitle>
                   {logo ? (
-                    <img src={logo} alt={siteName} className="h-7 w-auto" />
+                    <img src={logo} alt={`Логотип ${siteName}`} className="h-7 w-auto" />
                   ) : (
                     <span className="text-lg font-bold tracking-tight">
                       {siteName}
