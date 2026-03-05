@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "../components/landing/layout/Header";
 import Footer from "../components/landing/layout/Footer";
 import WelcomePopup from "../components/WelcomePopup";
@@ -31,6 +33,19 @@ import {
 
 
 const Index = () => {
+  const { hash } = useLocation();
+
+  // Прокрутка к якорю при переходе с другой страницы (например /about → /#pricing)
+  useEffect(() => {
+    if (hash) {
+      const id = hash.slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [hash]);
+
   return (
     <div className="min-h-screen flex flex-col">
       <StructuredData />
@@ -59,7 +74,15 @@ const Index = () => {
           <ProductDetails {...detailsContent} />
         </RevealOnScroll>
         <RevealOnScroll>
-          <SocialProof {...testimonialsContent} />
+          <SocialProof
+            {...testimonialsContent}
+            headline={
+              <>
+                Отзывы участников <del className="line-through">курса</del>{" "}
+                групп подготовки к экзамену в Минюсте
+              </>
+            }
+          />
         </RevealOnScroll>
         <RevealOnScroll>
           <Pricing {...pricingContent} />

@@ -11,12 +11,12 @@ interface HeroProps {
 }
 
 const Hero = ({ headline, subheadline, ctaText, ctaHref }: HeroProps) => (
-  <section className="py-20 pb-16 md:py-32 md:pb-20 bg-background">
+  <section className="py-20 pb-16 md:py-32 md:pb-20 bg-background" itemScope itemType="https://schema.org/WebPageElement">
     <Container className="text-center max-w-3xl mx-auto">
-      <Heading as="h1" className="mb-6 animate-fade-in-up">
+      <Heading as="h1" className="mb-6 animate-fade-in-up" itemProp="headline">
         {headline}
       </Heading>
-      <Text variant="lead" className="mb-8 max-w-2xl mx-auto animate-fade-in-up [animation-delay:100ms] opacity-0">
+      <Text variant="lead" className="mb-8 max-w-2xl mx-auto animate-fade-in-up [animation-delay:100ms] opacity-0" itemProp="description">
         {subheadline}
       </Text>
       <div className="animate-fade-in-up [animation-delay:200ms] opacity-0">

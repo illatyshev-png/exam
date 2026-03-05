@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from "react";
+import { getExternalLinkRel } from "@/utils/linkRel";
 
 function linkifyText(text: string): ReactNode {
   const pattern =
@@ -11,11 +12,11 @@ function linkifyText(text: string): ReactNode {
     if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index));
 
     if (match[1]) {
-      parts.push(<a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{match[1]}</a>);
+      parts.push(<a key={match.index} href={match[2]} target="_blank" rel={getExternalLinkRel(match[2])} className="text-accent hover:underline">{match[1]}</a>);
     } else if (match[3]) {
-      parts.push(<a key={match.index} href={match[3]} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{match[3]}</a>);
+      parts.push(<a key={match.index} href={match[3]} target="_blank" rel={getExternalLinkRel(match[3])} className="text-accent hover:underline">{match[3]}</a>);
     } else if (match[4]) {
-      parts.push(<a key={match.index} href={`mailto:${match[4]}`} className="text-accent hover:underline">{match[4]}</a>);
+      parts.push(<a key={match.index} href={`mailto:${match[4]}`} rel="nofollow" className="text-accent hover:underline">{match[4]}</a>);
     }
 
     lastIndex = match.index + match[0].length;

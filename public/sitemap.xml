@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Главная страница -->
   <url>
     <loc>https://exam.ilat.info/</loc>
     <lastmod>2026-03-02</lastmod>
@@ -13,6 +14,74 @@
     <image:image>
       <image:loc>https://exam.ilat.info/author.jpg</image:loc>
       <image:title>Илья Латышев - автор курса</image:title>
+    </image:image>
+  </url>
+
+  <!-- О программе -->
+  <url>
+    <loc>https://exam.ilat.info/about</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/solution.png</image:loc>
+      <image:title>Что получает каждый участник группы</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/что получает.jpg</image:loc>
+      <image:title>Программа подготовки</image:title>
+    </image:image>
+  </url>
+
+  <!-- Стоимость -->
+  <url>
+    <loc>https://exam.ilat.info/pricing</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/pricing.png</image:loc>
+      <image:title>Стоимость участия в группе</image:title>
+    </image:image>
+  </url>
+
+  <!-- Отзывы -->
+  <url>
+    <loc>https://exam.ilat.info/reviews</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/testimonials.png</image:loc>
+      <image:title>Отзывы участников</image:title>
+    </image:image>
+  </url>
+
+  <!-- Об авторе -->
+  <url>
+    <loc>https://exam.ilat.info/author</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://exam.ilat.info/author.jpg</image:loc>
+      <image:title>Илья Латышев - автор программы</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/authority.png</image:loc>
+      <image:title>Экспертиза автора</image:title>
+    </image:image>
+  </url>
+
+  <!-- FAQ -->
+  <url>
+    <loc>https://exam.ilat.info/faq</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://exam.ilat.info/sections/faq.jpeg</image:loc>
+      <image:title>Часто задаваемые вопросы</image:title>
     </image:image>
   </url>
 </urlset>

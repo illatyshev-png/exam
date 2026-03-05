@@ -78,9 +78,13 @@ function PricingCard({
         {plan.description}
       </p>
 
-      <div className="mt-5 mb-1 text-center">
+      <div className="mt-5 mb-1 text-center" itemScope itemType="https://schema.org/Offer">
+        <meta itemProp="priceCurrency" content="BYN" />
+        <meta itemProp="price" content={tier.price.replace(/[^\d]/g, "")} />
+        <meta itemProp="availability" content="https://schema.org/InStock" />
+        <link itemProp="url" href={tier.ctaHref} />
         <div className="flex items-baseline justify-center gap-2">
-          <span className="text-3xl font-bold text-foreground">
+          <span className="text-3xl font-bold text-foreground" itemProp="price">
             {tier.price}
           </span>
           {tier.oldPrice && (
@@ -154,8 +158,12 @@ function TopicCard({ topic }: { topic: TopicItem }) {
         {topic.name}
       </Heading>
 
-      <div className="mt-5 mb-1 text-center">
-        <span className="text-3xl font-bold text-foreground">
+      <div className="mt-5 mb-1 text-center" itemScope itemType="https://schema.org/Offer">
+        <meta itemProp="priceCurrency" content="BYN" />
+        <meta itemProp="price" content={topic.price.replace(/[^\d]/g, "")} />
+        <meta itemProp="availability" content="https://schema.org/InStock" />
+        <link itemProp="url" href={topic.ctaHref} />
+        <span className="text-3xl font-bold text-foreground" itemProp="price">
           {topic.price}
         </span>
       </div>

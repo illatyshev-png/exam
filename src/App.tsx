@@ -4,6 +4,11 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import About from "./pages/About";
+import Pricing from "./pages/Pricing";
+import FAQ from "./pages/FAQ";
+import Reviews from "./pages/Reviews";
+import Author from "./pages/Author";
 import NotFound from "./pages/NotFound";
 import YandexMetrika from "./components/YandexMetrika";
 
@@ -18,6 +23,11 @@ const App = () => (
         <YandexMetrika />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/author" element={<Author />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

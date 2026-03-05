@@ -5,7 +5,7 @@ import Heading from "../ui/Heading";
 import SectionImage from "../ui/SectionImage";
 
 interface SocialProofProps {
-  headline: string;
+  headline: React.ReactNode;
   images: string[];
   autoScrollInterval?: number;
 }

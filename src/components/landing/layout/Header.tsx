@@ -9,6 +9,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import Container from "../ui/Container";
+import { Link, useLocation } from "react-router-dom";
 
 interface HeaderProps {
   siteName: string;
@@ -21,6 +22,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => {
@@ -63,20 +65,27 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
     (href: string) => {
       const wasOpen = mobileOpen;
       setMobileOpen(false);
-      const id = href.replace("#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        if (wasOpen) {
-          setTimeout(() => {
+      
+      // Если это внутренняя ссылка (начинается с #)
+      if (href.startsWith("#")) {
+        const id = href.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          if (wasOpen) {
+            setTimeout(() => {
+              el.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 350);
+          } else {
             el.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 350);
-        } else {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         }
       }
+      // Если это обычная ссылка - ничего не делаем, пусть React Router обработает
     },
     [mobileOpen],
   );
+
+  const onMainPage = location.pathname === "/";
 
   return (
     <header
@@ -95,11 +104,7 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
         <nav className="flex min-h-16 items-center justify-between gap-4 py-2">
           {/* Logo */}
           <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
+            href="/"
             className="flex items-center gap-2 max-w-[40%]"
             aria-label="На главную"
           >
@@ -112,40 +117,58 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
             )}
           </a>
 
-          {/* Desktop navigation */}
+          {/* Desktop navigation - якоря на главной */}
           <ul className="hidden items-center gap-1 md:flex">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    scrollTo(link.href);
-                  }}
-                  className={cn(
-                    "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
-                    activeSection === link.href
-                      ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground",
+            {navLinks.map((link) => {
+              const isLinkActive = onMainPage && activeSection === link.href;
+              return (
+                <li key={link.href}>
+                  {onMainPage ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollTo(link.href);
+                      }}
+                      className={cn(
+                        "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                        isLinkActive
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground",
+                      )}
+                    >
+                      {link.label}
+                      {isLinkActive && (
+                        <span className="absolute inset-x-1 -bottom-[1.5px] h-0.5 rounded-full bg-primary" />
+                      )}
+                    </a>
+                  ) : (
+                    <Link
+                      to={{ pathname: "/", hash: link.href.slice(1) }}
+                      className="relative rounded-md px-3 py-2 text-sm font-medium transition-colors text-muted-foreground hover:text-foreground"
+                    >
+                      {link.label}
+                    </Link>
                   )}
-                >
-                  {link.label}
-                  {activeSection === link.href && (
-                    <span className="absolute inset-x-1 -bottom-[1.5px] h-0.5 rounded-full bg-primary" />
-                  )}
-                </a>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
 
-          {/* Desktop CTA */}
-          <Button
-            size="sm"
-            className="hidden md:inline-flex"
-            onClick={() => scrollTo("#pricing")}
-          >
-            Присоединиться к группе
-          </Button>
+          {/* Desktop CTA - якорь #pricing на главной */}
+          {onMainPage ? (
+            <Button
+              size="sm"
+              className="hidden md:inline-flex"
+              onClick={() => scrollTo("#pricing")}
+            >
+              Присоединиться к группе
+            </Button>
+          ) : (
+            <Button size="sm" className="hidden md:inline-flex" asChild>
+              <Link to="/#pricing">Присоединиться к группе</Link>
+            </Button>
+          )}
 
           {/* Mobile menu */}
           <Button
@@ -173,33 +196,50 @@ const Header = ({ siteName, logo, navLinks }: HeaderProps) => {
               </SheetHeader>
 
               <nav className="mt-8 flex flex-col gap-1">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      scrollTo(link.href);
-                    }}
-                    className={cn(
-                      "rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
-                      activeSection === link.href
-                        ? "bg-accent text-accent-foreground"
-                        : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                    )}
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const isLinkActive = onMainPage && activeSection === link.href;
+                  return onMainPage ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        scrollTo(link.href);
+                      }}
+                      className={cn(
+                        "rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
+                        isLinkActive
+                          ? "bg-accent text-accent-foreground"
+                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  ) : (
+                    <Link
+                      key={link.href}
+                      to={{ pathname: "/", hash: link.href.slice(1) }}
+                      onClick={() => setMobileOpen(false)}
+                      className="rounded-md px-3 py-2.5 text-sm font-medium transition-colors text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                })}
 
                 <div className="my-4 h-px bg-border" />
 
-                <Button
-                  className="w-full"
-                  onClick={() => scrollTo("#pricing")}
-                >
-                  Присоединиться к группе
-                </Button>
+                {onMainPage ? (
+                  <Button className="w-full" onClick={() => scrollTo("#pricing")}>
+                    Присоединиться к группе
+                  </Button>
+                ) : (
+                  <Button className="w-full" asChild>
+                    <Link to="/#pricing" onClick={() => setMobileOpen(false)}>
+                      Присоединиться к группе
+                    </Link>
+                  </Button>
+                )}
               </nav>
             </SheetContent>
           </Sheet>

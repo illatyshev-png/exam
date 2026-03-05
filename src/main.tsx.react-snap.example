@@ -5,10 +5,13 @@ import "./index.css";
 
 const rootElement = document.getElementById("root")!;
 
-// Если контент prerendered (react-snap) — hydrate, иначе — обычный render (dev)
+// Проверяем, был ли контент prerendered
+// Если да - используем hydrate, если нет - обычный render
 if (rootElement.hasChildNodes()) {
-  hydrateRoot(rootElement, <StrictMode><App /></StrictMode>);
+  // Hydrate для prerendered контента (react-snap)
+  hydrateRoot(rootElement, <App />);
 } else {
+  // Обычный рендер для dev режима
   createRoot(rootElement).render(
     <StrictMode>
       <App />

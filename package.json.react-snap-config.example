@@ -19,23 +19,20 @@
       "collapseWhitespace": true,
       "removeComments": true
     },
-    "puppeteerExecutablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
     "puppeteerArgs": [
       "--no-sandbox",
-      "--disable-setuid-sandbox",
-      "--disable-dev-shm-usage"
+      "--disable-setuid-sandbox"
     ],
     "include": [
-      "/",
-      "/about",
-      "/pricing",
-      "/faq",
-      "/reviews",
-      "/author"
+      "/"
     ],
     "skipThirdPartyRequests": true,
     "cacheAjaxRequests": false,
     "removeBlobs": true,
+    "fixWebpackChunksIssue": false,
+    "removeStyleTags": false,
+    "preloadImages": true,
+    "inlineCss": false,
     "timeout": 45000
   },
   "dependencies": {

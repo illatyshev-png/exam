@@ -1,5 +1,6 @@
 import Container from "../ui/Container";
 import Section from "../ui/Section";
+import { getExternalLinkRel } from "@/utils/linkRel";
 import Heading from "../ui/Heading";
 import Text from "../ui/Text";
 import LandingCard from "../ui/LandingCard";
@@ -56,7 +57,7 @@ const Solution = ({ headline, description, benefits, ctaText, ctaHref, highlight
               <a
                 href={b.linkHref}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={b.linkHref.startsWith("http") ? getExternalLinkRel(b.linkHref) : "noopener noreferrer"}
                 className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline mt-3"
               >
                 {b.linkText}
