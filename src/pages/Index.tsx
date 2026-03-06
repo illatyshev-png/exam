@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "../components/landing/layout/Header";
 import Footer from "../components/landing/layout/Footer";
-import WelcomePopup from "../components/WelcomePopup";
 import Hero from "../components/landing/sections/Hero";
 import StatsBar from "../components/landing/sections/StatsBar";
 import Comparison from "../components/landing/sections/Comparison";
@@ -49,7 +48,6 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <StructuredData />
-      <WelcomePopup />
       <Header
         siteName={siteConfig.name}
         logo={siteConfig.logo}
