@@ -28,6 +28,13 @@ export default function WelcomePopup() {
     sessionStorage.setItem(STORAGE_KEY, "true");
   };
 
+  const handleOpenChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (!nextOpen) {
+      sessionStorage.setItem(STORAGE_KEY, "true");
+    }
+  };
+
   const handleJoinGroup = () => {
     handleClose();
     const pricingEl = document.getElementById("pricing");
@@ -37,7 +44,7 @@ export default function WelcomePopup() {
   };
 
   return (
-    <Dialog open={open} onOpenChange={(o) => !o && handleClose()}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-accent font-semibold">
