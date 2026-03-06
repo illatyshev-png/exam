@@ -1,15 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
+import { useCallback, useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "welcomePopupClosed";
 
@@ -23,17 +18,19 @@ export default function WelcomePopup() {
     }
   }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
     sessionStorage.setItem(STORAGE_KEY, "true");
-  };
+  }, []);
 
-  const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen);
-    if (!nextOpen) {
-      sessionStorage.setItem(STORAGE_KEY, "true");
-    }
-  };
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, handleClose]);
 
   const handleJoinGroup = () => {
     handleClose();
@@ -43,33 +40,50 @@ export default function WelcomePopup() {
     }
   };
 
-  // Не рендерим Dialog при закрытии — полностью размонтируем, чтобы гарантированно скрыть окно
   if (!open) return null;
 
-  return (
-    <Dialog open={true} onOpenChange={handleOpenChange}>
-      <DialogContent
-        className="sm:max-w-md"
-        onPointerDownOutside={handleClose}
-        onEscapeKeyDown={handleClose}
+  const overlay = (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="welcome-popup-title"
+    >
+      {/* Overlay — клик закрывает */}
+      <div
+        className="absolute inset-0 cursor-pointer bg-black/80"
+        onClick={handleClose}
+        aria-hidden
+      />
+      {/* Контент — клик не закрывает */}
+      <div
+        className={cn(
+          "relative z-10 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg",
+          "animate-in fade-in-0 zoom-in-95 duration-200"
+        )}
+        onClick={(e) => e.stopPropagation()}
       >
-        <DialogHeader>
-          <DialogTitle className="text-accent font-semibold">
+        <button
+          type="button"
+          onClick={handleClose}
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          aria-label="Закрыть"
+        >
+          <X className="h-4 w-4" />
+        </button>
+        <div className="space-y-2 pr-8">
+          <h2 id="welcome-popup-title" className="text-lg font-semibold text-accent">
             Актуально
-          </DialogTitle>
-          <DialogDescription asChild>
-            <div className="space-y-2 pt-2">
-              <p className="font-medium text-foreground">
-                19-я группа стартует в марте 2026
-              </p>
-              <p className="text-muted-foreground">
-                Сейчас я заканчиваю работу с двумя группами, набранными в январе.
-                Присоединяйтесь к 19-й группе — количество мест ограничено!
-              </p>
-            </div>
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter className="flex-col sm:flex-row gap-2 sm:gap-2 pt-4">
+          </h2>
+          <p className="font-medium text-foreground">
+            19-я группа стартует в марте 2026
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Сейчас я заканчиваю работу с двумя группами, набранными в январе.
+            Присоединяйтесь к 19-й группе — количество мест ограничено!
+          </p>
+        </div>
+        <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
           <Button
             variant="outline"
             onClick={handleClose}
@@ -84,8 +98,10 @@ export default function WelcomePopup() {
           >
             Присоединиться к группе
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </div>
+      </div>
+    </div>
   );
+
+  return createPortal(overlay, document.body);
 }
