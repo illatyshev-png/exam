@@ -43,9 +43,16 @@ export default function WelcomePopup() {
     }
   };
 
+  // Не рендерим Dialog при закрытии — полностью размонтируем, чтобы гарантированно скрыть окно
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open={true} onOpenChange={handleOpenChange}>
+      <DialogContent
+        className="sm:max-w-md"
+        onPointerDownOutside={handleClose}
+        onEscapeKeyDown={handleClose}
+      >
         <DialogHeader>
           <DialogTitle className="text-accent font-semibold">
             Актуально
