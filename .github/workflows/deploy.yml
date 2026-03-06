@@ -33,4 +33,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           local-dir: dist/
-          server-dir: /home/ilatinfo/exam.ilat.info/
+          # Important: most cPanel FTP users are chrooted into a directory.
+          # Use a path relative to that FTP root. Default: deploy into FTP root.
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
