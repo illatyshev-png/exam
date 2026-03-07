@@ -13,8 +13,12 @@ export default function WelcomePopup() {
   const [canShow, setCanShow] = useState(false);
 
   useEffect(() => {
-    // Проверяем, что мы в браузере
+    // Проверяем, что мы в браузере и это НЕ prerendering (react-snap)
     if (typeof window === "undefined") return;
+
+    // react-snap устанавливает этот флаг во время prerendering
+    const isPrerendering = !!(window as any).__REACT_SNAP__;
+    if (isPrerendering) return;
 
     // Проверяем sessionStorage
     try {
@@ -81,7 +85,7 @@ export default function WelcomePopup() {
     }
   }, [handleClose]);
 
-  // Не рендерим на сервере
+  // Не рендерим: на сервере, при prerendering, или если не показываем
   if (typeof window === "undefined" || !canShow || !open) return null;
 
   const overlay = (
