@@ -1,57 +1,57 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "welcomePopupClosed";
 
-export default function WelcomePopup() {
+interface WelcomePopupProps {
+  onClose?: () => void;
+}
+
+export default function WelcomePopup({ onClose }: WelcomePopupProps) {
   const [open, setOpen] = useState(false);
-  const [canShow, setCanShow] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
 
+  // Проверка гидрации - только на клиенте
   useEffect(() => {
-    // Проверяем, что мы в браузере и это НЕ prerendering (react-snap)
-    if (typeof window === "undefined") return;
+    setIsHydrated(true);
+  }, []);
 
-    // react-snap устанавливает этот флаг во время prerendering
-    const isPrerendering = !!(window as any).__REACT_SNAP__;
-    if (isPrerendering) return;
+  // Проверяем sessionStorage и показываем popup
+  useEffect(() => {
+    if (!isHydrated) return;
 
-    // Проверяем sessionStorage
     try {
       const wasClosed = sessionStorage.getItem(STORAGE_KEY);
-
       if (!wasClosed) {
         // Задержка для полной загрузки страницы
         const timer = setTimeout(() => {
-          setCanShow(true);
           setOpen(true);
-        }, 300);
+        }, 500);
 
         return () => clearTimeout(timer);
       }
     } catch (error) {
       console.error("Error accessing sessionStorage:", error);
     }
-  }, []);
+  }, [isHydrated]);
 
   const handleClose = useCallback(() => {
     setOpen(false);
     try {
-      if (typeof window !== "undefined") {
-        sessionStorage.setItem(STORAGE_KEY, "true");
-      }
+      sessionStorage.setItem(STORAGE_KEY, "true");
     } catch (error) {
       console.error("Error setting sessionStorage:", error);
     }
-  }, []);
+    onClose?.();
+  }, [onClose]);
 
-  // Escape handler
+  // Обработчик Escape
   useEffect(() => {
-    if (!open || typeof window === "undefined") return;
+    if (!open || !isHydrated) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -63,38 +63,18 @@ export default function WelcomePopup() {
 
     window.addEventListener("keydown", handleKeyDown, { capture: true });
     return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
-  }, [open, handleClose]);
+  }, [open, isHydrated, handleClose]);
 
-  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleClose();
-  }, [handleClose]);
+  // Не рендерим на сервере и до полной гидрации
+  if (!isHydrated || !open) return null;
 
-  const handleContentClick = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-  }, []);
-
-  const handleJoinGroup = useCallback(() => {
-    handleClose();
-    if (typeof window !== "undefined") {
-      const pricingEl = document.getElementById("pricing");
-      if (pricingEl) {
-        pricingEl.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [handleClose]);
-
-  // Не рендерим: на сервере, при prerendering, или если не показываем
-  if (typeof window === "undefined" || !canShow || !open) return null;
-
-  const overlay = (
+  return (
     <div
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="welcome-popup-title"
-      onClick={handleOverlayClick}
+      onClick={handleClose}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
@@ -105,7 +85,7 @@ export default function WelcomePopup() {
           "relative z-10 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg",
           "animate-in fade-in-0 zoom-in-95 duration-200"
         )}
-        onClick={handleContentClick}
+        onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
@@ -145,7 +125,11 @@ export default function WelcomePopup() {
             variant="default"
             onClick={(e) => {
               e.stopPropagation();
-              handleJoinGroup();
+              handleClose();
+              const pricingEl = document.getElementById("pricing");
+              if (pricingEl) {
+                pricingEl.scrollIntoView({ behavior: "smooth" });
+              }
             }}
             className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
           >
@@ -155,6 +139,4 @@ export default function WelcomePopup() {
       </div>
     </div>
   );
-
-  return createPortal(overlay, document.body);
 }
