@@ -10,27 +10,63 @@ const STORAGE_KEY = "welcomePopupClosed";
 
 export default function WelcomePopup() {
   const [open, setOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
+  // Проверяем, что мы на клиенте
   useEffect(() => {
-    const wasClosed = sessionStorage.getItem(STORAGE_KEY);
-    if (!wasClosed) {
-      setOpen(true);
-    }
+    setIsClient(true);
   }, []);
+
+  // Показываем popup только после полной гидрации
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Небольшая задержка для уверенности в полной гидрации
+    const timer = setTimeout(() => {
+      setIsMounted(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, [isClient]);
+
+  // Проверяем sessionStorage только на клиенте после гидрации
+  useEffect(() => {
+    if (!isMounted) return;
+
+    try {
+      const wasClosed = sessionStorage.getItem(STORAGE_KEY);
+      if (!wasClosed) {
+        setOpen(true);
+      }
+    } catch (error) {
+      // Если sessionStorage недоступен, не показываем popup
+      console.error("Error accessing sessionStorage:", error);
+    }
+  }, [isMounted]);
 
   const handleClose = useCallback(() => {
     setOpen(false);
-    sessionStorage.setItem(STORAGE_KEY, "true");
+    try {
+      sessionStorage.setItem(STORAGE_KEY, "true");
+    } catch (error) {
+      console.error("Error setting sessionStorage:", error);
+    }
   }, []);
 
+  // Обработчик Escape только когда popup открыт и мы на клиенте
   useEffect(() => {
-    if (!open) return;
+    if (!open || !isClient) return;
+
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose();
+      if (e.key === "Escape") {
+        handleClose();
+      }
     };
+
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, handleClose]);
+  }, [open, isClient, handleClose]);
 
   const handleJoinGroup = () => {
     handleClose();
@@ -40,7 +76,8 @@ export default function WelcomePopup() {
     }
   };
 
-  if (!open) return null;
+  // Не рендерим на сервере и до полной гидрации
+  if (!isClient || !isMounted || !open) return null;
 
   const overlay = (
     <div

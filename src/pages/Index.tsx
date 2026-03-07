@@ -14,6 +14,7 @@ import FAQ from "../components/landing/sections/FAQ";
 import RevealOnScroll from "../components/landing/ui/RevealOnScroll";
 import ScrollToTop from "../components/landing/ui/ScrollToTop";
 import StructuredData from "../components/StructuredData";
+import WelcomePopup from "../components/WelcomePopup";
 
 import {
   siteConfig,
@@ -92,6 +93,7 @@ const Index = () => {
 
       <Footer {...footerContent} />
       <ScrollToTop />
+      <WelcomePopup />
     </div>
   );
 };
