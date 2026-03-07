@@ -10,74 +10,79 @@ const STORAGE_KEY = "welcomePopupClosed";
 
 export default function WelcomePopup() {
   const [open, setOpen] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const [canShow, setCanShow] = useState(false);
 
-  // Проверяем, что мы на клиенте
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    // Проверяем, что мы в браузере
+    if (typeof window === "undefined") return;
 
-  // Показываем popup только после полной гидрации
-  useEffect(() => {
-    if (!isClient) return;
-
-    // Небольшая задержка для уверенности в полной гидрации
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 100);
-
-    return () => clearTimeout(timer);
-  }, [isClient]);
-
-  // Проверяем sessionStorage только на клиенте после гидрации
-  useEffect(() => {
-    if (!isMounted) return;
-
+    // Проверяем sessionStorage
     try {
       const wasClosed = sessionStorage.getItem(STORAGE_KEY);
+
       if (!wasClosed) {
-        setOpen(true);
+        // Задержка для полной загрузки страницы
+        const timer = setTimeout(() => {
+          setCanShow(true);
+          setOpen(true);
+        }, 300);
+
+        return () => clearTimeout(timer);
       }
     } catch (error) {
-      // Если sessionStorage недоступен, не показываем popup
       console.error("Error accessing sessionStorage:", error);
     }
-  }, [isMounted]);
+  }, []);
 
   const handleClose = useCallback(() => {
     setOpen(false);
     try {
-      sessionStorage.setItem(STORAGE_KEY, "true");
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem(STORAGE_KEY, "true");
+      }
     } catch (error) {
       console.error("Error setting sessionStorage:", error);
     }
   }, []);
 
-  // Обработчик Escape только когда popup открыт и мы на клиенте
+  // Escape handler
   useEffect(() => {
-    if (!open || !isClient) return;
+    if (!open || typeof window === "undefined") return;
 
-    const onKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        e.preventDefault();
+        e.stopPropagation();
         handleClose();
       }
     };
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open, isClient, handleClose]);
+    window.addEventListener("keydown", handleKeyDown, { capture: true });
+    return () => window.removeEventListener("keydown", handleKeyDown, { capture: true });
+  }, [open, handleClose]);
 
-  const handleJoinGroup = () => {
+  const handleOverlayClick = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     handleClose();
-    const pricingEl = document.getElementById("pricing");
-    if (pricingEl) {
-      pricingEl.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  }, [handleClose]);
 
-  // Не рендерим на сервере и до полной гидрации
-  if (!isClient || !isMounted || !open) return null;
+  const handleContentClick = useCallback((e: React.MouseEvent) => {
+    e.stopPropagation();
+  }, []);
+
+  const handleJoinGroup = useCallback(() => {
+    handleClose();
+    if (typeof window !== "undefined") {
+      const pricingEl = document.getElementById("pricing");
+      if (pricingEl) {
+        pricingEl.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [handleClose]);
+
+  // Не рендерим на сервере
+  if (typeof window === "undefined" || !canShow || !open) return null;
 
   const overlay = (
     <div
@@ -85,25 +90,26 @@ export default function WelcomePopup() {
       role="dialog"
       aria-modal="true"
       aria-labelledby="welcome-popup-title"
+      onClick={handleOverlayClick}
     >
-      {/* Overlay — клик закрывает */}
-      <div
-        className="absolute inset-0 cursor-pointer bg-black/80"
-        onClick={handleClose}
-        aria-hidden
-      />
-      {/* Контент — клик не закрывает */}
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/80" aria-hidden="true" />
+
+      {/* Content */}
       <div
         className={cn(
           "relative z-10 w-full max-w-md rounded-lg border bg-background p-6 shadow-lg",
           "animate-in fade-in-0 zoom-in-95 duration-200"
         )}
-        onClick={(e) => e.stopPropagation()}
+        onClick={handleContentClick}
       >
         <button
           type="button"
-          onClick={handleClose}
-          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleClose();
+          }}
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 p-1"
           aria-label="Закрыть"
         >
           <X className="h-4 w-4" />
@@ -123,14 +129,20 @@ export default function WelcomePopup() {
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-end">
           <Button
             variant="outline"
-            onClick={handleClose}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleClose();
+            }}
             className="w-full sm:w-auto"
           >
             Узнать подробности
           </Button>
           <Button
             variant="default"
-            onClick={handleJoinGroup}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleJoinGroup();
+            }}
             className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-accent-foreground"
           >
             Присоединиться к группе

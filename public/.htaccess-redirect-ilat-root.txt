@@ -1,0 +1,12 @@
+# Вставьте этот блок в .htaccess в КОРНЕ сайта ilat.info
+# (если exam.ilat.info — отдельный хост и редирект должен быть на основном домене)
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Редирект ilat.info/exam и ilat.info/exam/* на exam.ilat.info (301)
+  RewriteRule ^exam/?(.*)$ https://exam.ilat.info/$1 [R=301,L]
+</IfModule>
+
+# Альтернатива без mod_rewrite (можно использовать один из вариантов):
+# Redirect 301 /exam https://exam.ilat.info/
+# RedirectMatch 301 ^/exam/(.*)$ https://exam.ilat.info/$1
